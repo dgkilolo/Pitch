@@ -21,21 +21,22 @@
     <!-- Content block -->
     {% block content %}
 
-    <div class="container">
-      <form>
-        <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
-      </form>  
+    <div class="container">     
 
       <div class="row">
-        <div class="col-md-4 card ">
+        <div>
           <h1>Puns</h1>
-        </div>
-        
+        </div>    
+        <div class="buttons" >
+          <a  href="{{url_for('main.add_pitch', userID = current_user.username)}}"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+        </div>  
       </div>
-          
-    
-    
+        <div>
+          {% for pitch in pitches %}            
+            <h2> {{pitch.title}} </h2>
+            <p> {{pitch.description}} </p>
+          {% endfor %}
+        </div>                      
     </div>
     {% endblock %}
     

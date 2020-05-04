@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User
+from ..models import User,Pitch
 from flask_login import login_required, current_user
-from .forms import UpdateProfile
+from .forms import UpdateProfile,NewPitch
 from .. import db,photos
 # import markdown2
 
@@ -25,8 +25,9 @@ def pun():
     '''
     View root page function that returns the puns page and its data
     '''
-
-    return render_template('puns.html')
+    title = 'Pitch'
+    pitches = Pitch.query.all()
+    return render_template('puns.html', title = title, pitches = pitches)
 
 @main.route('/quotes')
 def quote():
@@ -34,8 +35,8 @@ def quote():
     '''
     View root page function that returns the quote page and its data
     '''
-    
-    return render_template('quotes.html')
+    title = 'Pitch'
+    return render_template('quotes.html', title = title)
 
 @main.route('/twister')
 def twister():
@@ -43,8 +44,8 @@ def twister():
     '''
     View root page function that returns the tongue twister page and its data
     '''
-    
-    return render_template('twister.html')
+    title = 'Pitch'
+    return render_template('twister.html', title = title)
 
 
 @main.route('/user/<uname>')
@@ -87,3 +88,23 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/puns/new/<userID>', methods = ['GET','POST'])
+@login_required
+def add_pitch(userID):
+  user = User.query.filter_by(username = userID).first()  
+  form = NewPitch()
+  if form.validate_on_submit():
+    title = form.title.data
+    pitch = form.pitch.data    
+
+    # Updated pitch instance
+    new_pitch = Pitch(title=title,description=pitch, user_id = user.id)
+
+    # Save pitch method
+    new_pitch.save_pitch()
+    return redirect(url_for('.pun'))
+
+  title = 'New pitch'
+  return render_template('newpitch.html',title = title,pitch_form=form )
+

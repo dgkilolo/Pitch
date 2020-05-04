@@ -22,18 +22,22 @@
     {% block content %}
 
     <div class="container">
-      <form>
-        <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
-      </form>  
+      
 
       <div class="row">
-        
-        <div class="col-md-4 card ">
+        <div>
           <h1>Quotes</h1>
-        </div>
-        
-      </div>        
+        </div>    
+        <div class="buttons" >
+          <a  href="/quotes/new"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+        </div>  
+      </div>
+        <div>
+          {% for pitch in pitches %}            
+            <h2> {{pitch.title}} </h2>
+            <p> {{pitch.description}} </p>
+          {% endfor %}
+        </div>         
     </div>
     {% endblock %}
     

@@ -1,4 +1,14 @@
+body{
+  background-color: whitesmoke;
+}
+
 h1 {
   color: aqua;
   text-align: center;
+}
+#welcome{
+  text-align: center;
+}
+.buttons {
+  text-align: right;
 }
