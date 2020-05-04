@@ -10,9 +10,7 @@
     <title>Pitch</title>
     {% endif %}
   </head>
-  <body>    
-    
-    
+  <body>       
 
     <!-- Styles block -->
     {% block styles%}
@@ -23,14 +21,27 @@
     <!-- Content block -->
     {% block content %}
 
-    <!-- <div class="container">
+    <div class="container">
       <form>
         <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
         <input type="submit"  value="Submit" class="btn btn-default">
       </form>  
-    </div> -->    
-   
 
+      <div class="row">
+        <div class="col-md-4 card ">
+          <h1>Puns</h1>
+        </div>
+        <div class="col-md-4 card ">
+          <h1>Quotes</h1>
+        </div>
+        <div class="col-md-4 card ">
+          <h1>Tongue twisters</h1>
+        </div>
+      </div>
+          
+    
+    
+    </div>
     {% endblock %}
     
   </body>
