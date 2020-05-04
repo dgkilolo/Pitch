@@ -19,6 +19,34 @@ def index():
     return render_template('index.html', title = title)
 
 
+@main.route('/puns')
+def pun():
+
+    '''
+    View root page function that returns the puns page and its data
+    '''
+
+    return render_template('puns.html')
+
+@main.route('/quotes')
+def quote():
+
+    '''
+    View root page function that returns the quote page and its data
+    '''
+    
+    return render_template('quotes.html')
+
+@main.route('/twister')
+def twister():
+
+    '''
+    View root page function that returns the tongue twister page and its data
+    '''
+    
+    return render_template('twister.html')
+
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
