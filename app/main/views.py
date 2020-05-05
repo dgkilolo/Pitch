@@ -26,7 +26,7 @@ def pun():
     View root page function that returns the puns page and its data
     '''
     title = 'Pitch'
-    pitches = Pitch.query.all()
+    pitches = Pitch.query.filter_by(category = 'pun').all()
     return render_template('puns.html', title = title, pitches = pitches)
 
 @main.route('/quotes')
@@ -36,7 +36,8 @@ def quote():
     View root page function that returns the quote page and its data
     '''
     title = 'Pitch'
-    return render_template('quotes.html', title = title)
+    pitches = Pitch.query.filter_by(category = 'quote').all()
+    return render_template('quotes.html', title = title, pitches = pitches)
 
 @main.route('/twister')
 def twister():
@@ -45,7 +46,8 @@ def twister():
     View root page function that returns the tongue twister page and its data
     '''
     title = 'Pitch'
-    return render_template('twister.html', title = title)
+    pitches = Pitch.query.filter_by(category = 'tongue twister').all()
+    return render_template('twister.html', title = title, pitches = pitches)
 
 
 @main.route('/user/<uname>')
@@ -96,14 +98,55 @@ def add_pitch(userID):
   form = NewPitch()
   if form.validate_on_submit():
     title = form.title.data
-    pitch = form.pitch.data    
+    pitch = form.pitch.data  
+    category = form.category.data
 
     # Updated pitch instance
-    new_pitch = Pitch(title=title,description=pitch, user_id = user.id)
+    new_pitch = Pitch(title=title,description=pitch, user_id = user.id, category = category)
 
     # Save pitch method
     new_pitch.save_pitch()
     return redirect(url_for('.pun'))
+
+  title = 'New pitch'
+  return render_template('newpitch.html',title = title,pitch_form=form )
+
+@main.route('/quotes/new/<userID>', methods = ['GET','POST'])
+@login_required
+def add_pitched(userID):
+  user = User.query.filter_by(username = userID).first()  
+  form = NewPitch()
+  if form.validate_on_submit():
+    title = form.title.data
+    pitch = form.pitch.data     
+    category = form.category.data
+
+    # Updated pitch instance
+    new_pitch = Pitch(title=title,description=pitch, user_id = user.id, category = category)
+
+    # Save pitch method
+    new_pitch.save_pitch()
+    return redirect(url_for('.quote'))
+
+  title = 'New pitch'
+  return render_template('newpitch.html',title = title,pitch_form=form )
+
+@main.route('/twister/new/<userID>', methods = ['GET','POST'])
+@login_required
+def add_pitches(userID):
+  user = User.query.filter_by(username = userID).first()  
+  form = NewPitch()
+  if form.validate_on_submit():
+    title = form.title.data
+    pitch = form.pitch.data     
+    category = form.category.data
+
+    # Updated pitch instance
+    new_pitch = Pitch(title=title,description=pitch, user_id = user.id, category = category)
+
+    # Save pitch method
+    new_pitch.save_pitch()
+    return redirect(url_for('.twister'))
 
   title = 'New pitch'
   return render_template('newpitch.html',title = title,pitch_form=form )

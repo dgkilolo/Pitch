@@ -29,7 +29,7 @@
           <h1>Quotes</h1>
         </div>    
         <div class="buttons" >
-          <a  href="/quotes/new"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+          <a  href="{{url_for('main.add_pitched', userID = current_user.username)}}"><button type="button" class="btn btn-primary ">ADD<br></button></a>
         </div>  
       </div>
         <div>

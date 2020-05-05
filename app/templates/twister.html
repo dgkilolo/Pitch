@@ -21,15 +21,22 @@
     <!-- Content block -->
     {% block content %}
 
-    <div class="container">
-      
+    <div class="container">     
 
       <div class="row">
-        
-        <div class="col-md-4 card ">
-          <h1>Tongue twisters</h1>
-        </div>
+        <div>
+          <h1>Tongue Twister</h1>
+        </div>    
+        <div class="buttons" >
+          <a  href="{{url_for('main.add_pitches', userID = current_user.username)}}"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+        </div>  
       </div>
+        <div>
+          {% for pitch in pitches %}            
+            <h2> {{pitch.title}} </h2>
+            <p> {{pitch.description}} </p>
+          {% endfor %}
+        </div>                      
     </div>
     {% endblock %}
     
