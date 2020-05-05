@@ -40,14 +40,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-    # def save_review(self):
-    #     db.session.add(self)
-    #     db.session.commit()
-
-    # @classmethod
-    # def get_reviews(cls,id):
-    #     reviews = Review.query.filter_by(movie_id=id).all()
-    #     return reviews
+    
 
 class Pitch(db.Model):
   
@@ -59,7 +52,7 @@ class Pitch(db.Model):
   posted = db.Column(db.DateTime, default=datetime.utcnow)  
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   category = db.Column(db.String(255))
-  comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
+  # comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
   
 
   def save_pitch(self):
