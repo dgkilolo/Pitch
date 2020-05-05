@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import User,Pitch
 from flask_login import login_required, current_user
-from .forms import UpdateProfile,NewPitch
+from .forms import UpdateProfile,NewPitch,Comment
 from .. import db,photos
 # import markdown2
 
@@ -57,7 +57,10 @@ def profile(uname):
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    pitches=Pitch.query.filter_by(user_id=user.id).all()
+    category=Pitch.query.filter_by(category = " ").all()
+
+    return render_template("profile/profile.html", user = user,pitches=pitches, category=category)
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
@@ -110,6 +113,15 @@ def add_pitch(userID):
 
   title = 'New pitch'
   return render_template('newpitch.html',title = title,pitch_form=form )
+
+@main.route('/puns/new/<userID>/comment', methods = ['GET','POST'])  
+@login_required
+def add_comment(userID):
+  
+  form = Comment()
+  
+  return render_template('newcomment.html',pitch_form=form )
+
 
 @main.route('/quotes/new/<userID>', methods = ['GET','POST'])
 @login_required
