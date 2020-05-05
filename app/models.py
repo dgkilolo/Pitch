@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
-    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
@@ -110,53 +110,7 @@ class Comment(db.Model):
 
 
 
-# class Review(db.Model):
-
-#     __tablename__ = 'reviews'
-
-#     id = db.Column(db.Integer,primary_key = True)
-#     movie_id = db.Column(db.Integer)
-#     movie_title = db.Column(db.String)
-#     image_path = db.Column(db.String)
-#     movie_review = db.Column(db.String)
-#     posted = db.Column(db.DateTime,default=datetime.utcnow)
-#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
-#     all_reviews = []
-
-#     def __init__(self,movie_id,title,imageurl,review):
-#         self.movie_id = movie_id
-#         self.title = title
-#         self.imageurl = imageurl
-#         self.review = review
 
 
-#     def save_review(self):
-#         Review.all_reviews.append(self)
 
 
-#     @classmethod
-#     def clear_reviews(cls):
-#         Review.all_reviews.clear()
-
-#     @classmethod
-#     def get_reviews(cls,id):
-
-#         response = []
-
-#         for review in cls.all_reviews:
-#             if review.movie_id == id:
-#                 response.append(review)
-
-#         return response
-
-
-class Role(db.Model):
-    __tablename__ = 'roles'
-
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
-
-    def __repr__(self):
-        return f'User {self.name}'
