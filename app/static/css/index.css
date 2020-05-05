@@ -1,9 +1,9 @@
 body{
-  background-color: whitesmoke;
+  background-color: #ECE4B7;
 }
 
 h1 {
-  color: aqua;
+  color: #001B2E;
   text-align: center;
 }
 #welcome{
@@ -14,4 +14,14 @@ h1 {
 }
 #myInput {
   text-align: center;
+}
+#join{
+  background-color:#001B2E ;
+  padding: 20px;
+}
+.btn-xs,.back{
+  background-color:#001B2E ;
+}
+#heading{
+  font-size: 145px;
 }

@@ -29,13 +29,19 @@
           <h1>Quotes</h1>
         </div>    
         <div class="buttons" >
-          <a  href="{{url_for('main.add_pitched', userID = current_user.username)}}"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+          <a  href="{{url_for('main.add_pitched', userID = current_user.username)}}"><button type="button" class="btn btn-primary back ">ADD<br></button></a>
         </div>  
       </div>
         <div>
           {% for pitch in pitches %}            
-            <h2> {{pitch.title}} </h2>
-            <p> {{pitch.description}} </p>
+            <h2>{{pitch.description}}</h2>
+            <p>{{pitch.title}}</p>
+            <div >
+              <a  href="{{url_for('main.add_commented', userID = current_user.username)}}"><button type="button" class="btn btn-primary btn-xs">COMMENT<br></button></a>
+            </div>
+            {% for comments in comment %} 
+              <p> {{comments.comment}} </p>
+            {% endfor %}
           {% endfor %}
         </div>         
     </div>

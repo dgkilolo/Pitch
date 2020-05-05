@@ -28,17 +28,23 @@
           <h1>Puns</h1>
         </div>    
         <div class="buttons" >
-          <a  href="{{url_for('main.add_pitch', userID = current_user.username)}}"><button type="button" class="btn btn-primary ">ADD<br></button></a>
+          <a  href="{{url_for('main.add_pitch', userID = current_user.username)}}"><button type="button" class="btn btn-success back ">ADD<br></button></a>
         </div>  
       </div>
         <div>
           {% for pitch in pitches %}            
-            <h2> {{pitch.title}} </h2>
-            <p> {{pitch.description}} </p>
+            <h2>{{pitch.description}}</h2>
+            <p>{{pitch.title}}</p>            
             <div >
-              <a  href="{{url_for('main.add_comment', userID = current_user.username)}}"><button type="button" class="btn btn-primary btn-sm">COMMENT<br></button></a>
+              <a  href="{{url_for('main.add_comment', userID = current_user.username, pitch_id = pitch.id)}}"><button type="button" class="btn btn-primary btn-xs">COMMENT<br></button></a>
             </div>
-          {% endfor %}
+            
+            {% for comments in comment %} 
+              <li> {{comments.comment}} </li>
+            {% endfor %}
+
+          {% endfor %}          
+
         </div>                      
     </div>
     {% endblock %}

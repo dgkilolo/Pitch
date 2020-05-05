@@ -13,6 +13,6 @@ class NewPitch(FlaskForm):
   choices=[("pun","pun"),("quote","quote"),("tongue twister","tongue twister")],validators = [Required()])
   submit=SubmitField("Add Pitch")
 
-class Comment(FlaskForm):
+class Feedback(FlaskForm):
   comment = TextAreaField("Comment", validators=[Required()])
   submit = SubmitField('Comment')
